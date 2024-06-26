@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
+import { Blog } from "src/blogs/entities/blog.entity";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from "typeorm";
 
 
 @Entity('users')
@@ -24,6 +25,9 @@ export class User {
 
     @Column()
     age: Number;
+
+    @OneToMany(() => Blog, blog => blog.user)
+    blogs: Blog[];
 
     @Column({ default: true })
     isActive?: Boolean;
