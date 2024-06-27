@@ -26,7 +26,7 @@ export class User {
     @Column()
     age: Number;
 
-    @OneToMany(() => Blog, blog => blog.user)
+    @OneToMany('blogs', 'user')
     blogs: Blog[];
 
     @Column({ default: true })

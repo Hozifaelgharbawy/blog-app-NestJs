@@ -13,10 +13,7 @@ export class Blog {
     @Column()
     content: string;
 
-    @ManyToOne(() => User, user => user.blogs)
-    @JoinColumn({ name: 'userId' })
+    @ManyToOne("users", "blogs")
+    @JoinColumn({ name: 'user' })
     user: User;
-
-    @Column()
-    userId: number;
 }

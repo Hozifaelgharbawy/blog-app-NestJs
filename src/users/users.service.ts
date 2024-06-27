@@ -31,8 +31,8 @@ export class UsersService {
     return this.userRepository.find({ relations: ['blogs'] });
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOne({ where: { id }, relations: ['blogs'] });
+  async findOne(id: number) {
+    return await this.userRepository.findOneOrFail({ where: { id }, relations: ['blogs'] });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
@@ -47,6 +47,9 @@ export class UsersService {
   }
 
   async remove(id: number) {
+    const result = await this.findOne(id);
+    console.log(result);
+    
     return await this.userRepository.delete(id);
 
   }

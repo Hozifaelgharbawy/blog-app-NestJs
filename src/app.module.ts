@@ -3,13 +3,13 @@ import { UsersModule } from './users/users.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
-import * as dotenv from 'dotenv';
 import { Blog } from './blogs/entities/blog.entity';
-dotenv.config();
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
-  imports: [UsersModule,
-    BlogsModule,
+  imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: process.env.DB_TYPE as any,
       host: process.env.DB_HOST,
@@ -20,6 +20,8 @@ dotenv.config();
       entities: [User, Blog],
       synchronize: true,
     }),
+    BlogsModule,
+    UsersModule,
   ]
 })
 export class AppModule { }
